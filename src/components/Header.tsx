@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@UI';
 import { Search } from './Search';
 
-import logo from '@assets/pizza-logo.svg';
+import logo from '@assets/img/pizza-logo.svg';
 
 export const Header: FC = () => {
   return (
@@ -45,7 +45,7 @@ export const Header: FC = () => {
             <span>3000 ₽</span>
             <span className="w-px h-6 mx-3.5 bg-white opacity-25" />
             <svg
-              className="mr-3"
+              className="mr-2"
               width="18"
               height="18"
               viewBox="0 0 18 18"
@@ -74,7 +74,7 @@ export const Header: FC = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>2</span>
+            <span>5</span>
           </Button>
         </div>
       </div>

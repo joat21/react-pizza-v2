@@ -27,6 +27,7 @@
 
   color-scheme: light dark;
   color: var(--color-primary);
+  font-family: Nunito, Roboto, system-ui, Tahoma, sans-serif;
   background-color: var(--color-yellow);
 
   font-synthesis: none;
