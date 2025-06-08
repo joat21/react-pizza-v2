@@ -23,12 +23,17 @@ export type Category = {
 
 export enum SortBy {
   RATING_DESC = '-rating',
-  PRICE_ASC = 'price',
-  PRICE_DESC = '-price',
+  PRICE_ASC = 'minPrice',
+  PRICE_DESC = '-minPrice',
   ALPHABET = 'title',
 }
 
 export type SortType = {
   name: string;
+  sortBy: SortBy;
+};
+
+export type PizzaFilters = {
+  categoryId: string;
   sortBy: SortBy;
 };

@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react';
 import clsx from 'clsx';
-import { SortBy, type SortType } from 'types';
+import { SortBy, type PizzaFilters, type SortType } from 'types';
 
 const sorts: SortType[] = [
   { name: 'популярные', sortBy: SortBy.RATING_DESC },
@@ -9,9 +9,13 @@ const sorts: SortType[] = [
   { name: 'по алфавиту', sortBy: SortBy.ALPHABET },
 ];
 
-export const Sort: FC = () => {
+type SortProps = {
+  filters: PizzaFilters;
+  setFilters: React.Dispatch<React.SetStateAction<PizzaFilters>>;
+};
+
+export const Sort: FC<SortProps> = ({ filters, setFilters }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="relative cursor-pointer">
@@ -37,18 +41,21 @@ export const Sort: FC = () => {
         </svg>
         <span className="font-bold">Сортировка:</span>
         <span className="text-orange-500 border-b border-dashed">
-          {sorts[activeIndex].name}
+          {sorts.find((sort) => sort.sortBy === filters.sortBy)?.name}
         </span>
       </div>
       {isOpen && (
         <ul className="absolute right-0 py-2.5 max-w-[160px] w-[100%] rounded-[10px] bg-white overflow-hidden shadow-light">
-          {sorts.map((sort, index) => (
+          {sorts.map((sort) => (
             <li
-              key={index}
+              key={sort.name}
               className={clsx('py-3 px-5 cursor-pointer hover:bg-yellow-50', {
-                'text-orange-500 font-bold bg-yel': activeIndex === index,
+                'text-orange-500 font-bold bg-yel':
+                  filters.sortBy === sort.sortBy,
               })}
-              onClick={() => setActiveIndex(index)}
+              onClick={() =>
+                setFilters((prev) => ({ ...prev, sortBy: sort.sortBy }))
+              }
             >
               {sort.name}
             </li>
