@@ -3,7 +3,7 @@ import type { FC } from 'react';
 
 export const Search: FC = () => {
   return (
-    <div className="relative">
+    <div className="relative w-[100%]">
       <svg
         className="absolute top-3.5 left-3.5 w-5.5 h-5.5 opacity-50"
         height="512"

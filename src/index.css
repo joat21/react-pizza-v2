@@ -4,8 +4,12 @@
   --color-white: #fff;
   --color-black: #000;
 
+  --color-gray-50: #f9f9f9;
+  --color-gray-100: #f4f4f4;
+  --color-gray-200: #ececec;
   --color-gray-300: #ccc;
   --color-gray-500: #7b7b7b;
+  --color-gray-700: #282828;
   --color-gray-800: #232323;
   --color-gray-900: #181818;
 
@@ -13,11 +17,13 @@
   --color-orange-600: #f24701;
   --color-orange-700: #de4101;
 
-  --color-yellow: #ffdf8c;
+  --color-yellow-50: #fff7f4;
+  --color-yellow-200: #ffdf8c;
 
   --color-primary: var(--color-gray-800);
   --color-secondary: var(--color-white);
   --color-accent: var(--color-orange-500);
+  --shadow-light: 0px 5px 15px rgba(0, 0, 0, 0.09);
 }
 
 :root {
@@ -28,7 +34,7 @@
   color-scheme: light dark;
   color: var(--color-primary);
   font-family: Nunito, Roboto, system-ui, Tahoma, sans-serif;
-  background-color: var(--color-yellow);
+  background-color: var(--color-yellow-200);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

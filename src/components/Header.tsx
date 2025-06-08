@@ -9,8 +9,8 @@ import logo from '@assets/img/pizza-logo.svg';
 export const Header: FC = () => {
   return (
     <header>
-      <div className="container flex justify-between items-center">
-        <Link to="/" className="flex gap-[15px]">
+      <div className="container flex justify-between items-center gap-10">
+        <Link to="/" className="flex gap-[15px] shrink-0">
           <img width={38} src={logo} alt="Логотип React Pizza" />
           <div>
             <span className="text-2xl font-extrabold text-gray-900 uppercase">
@@ -20,7 +20,7 @@ export const Header: FC = () => {
           </div>
         </Link>
         <Search />
-        <div className="flex gap-2.5 items-center">
+        <div className="flex gap-2.5 items-center shrink-0">
           <Button
             className="flex items-center gap-1 font-semibold"
             variant="outline"
