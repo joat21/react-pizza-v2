@@ -8,6 +8,14 @@
 
 @font-face {
   font-family: 'Nunito';
+  src: url('assets/fonts/Nunito-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
   src: url('assets/fonts/Nunito-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
@@ -18,6 +26,14 @@
   font-family: 'Nunito';
   src: url('assets/fonts/Nunito-ExtraBold.woff2') format('woff2');
   font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('assets/fonts/Nunito-Black.woff2') format('woff2');
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
