@@ -1,8 +1,8 @@
 import { useState, type FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { PizzaVariantSelector } from './PizzaVariantSelector';
-import type { Pizza } from 'types';
+import { PizzaVariantSelector } from '@components';
+import type { Pizza, PizzaVariant } from 'types';
 import { Button } from '@UI';
 
 type PizzaCardProps = {
@@ -10,7 +10,9 @@ type PizzaCardProps = {
 };
 
 export const PizzaCard: FC<PizzaCardProps> = ({ pizza }) => {
-  const [currentVariant, setCurrentVariant] = useState(pizza.variants[0]);
+  const [currentVariant, setCurrentVariant] = useState<PizzaVariant | null>(
+    pizza.variants[0]
+  );
   const [count, setCount] = useState(0);
 
   return (
@@ -26,7 +28,7 @@ export const PizzaCard: FC<PizzaCardProps> = ({ pizza }) => {
         />
         <div className="flex justify-between items-center w-[100%] px-3">
           <span className="text-[22px] font-bold">
-            {currentVariant.price} ₽
+            {currentVariant?.price} ₽
           </span>
           <Button
             className="flex items-center gap-1"

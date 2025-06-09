@@ -1,8 +1,7 @@
 import { useState, type FC } from 'react';
 import clsx from 'clsx';
 
-import { Categories, Sort } from '@components';
-import { PizzaCard } from '../PizzaCard';
+import { Categories, PizzaList, Sort } from '@components';
 
 import { useGetCategoriesQuery } from '../../api/useGetCategoriesQuery';
 import { useGetPizzasQuery } from '../../api/useGetPizzasQuery';
@@ -36,13 +35,7 @@ export const Home: FC = () => {
         <Sort filters={filters} setFilters={setFilters} />
       </div>
       <h2 className={styles.title}>Вся пицца</h2>
-      <ul className="grid grid-rows-1 grid-cols-4 gap-x-12 gap-y-16">
-        {pizzas.map((pizza) => (
-          <li key={pizza.id}>
-            <PizzaCard pizza={pizza} />
-          </li>
-        ))}
-      </ul>
+      <PizzaList pizzas={pizzas} />
     </div>
   );
 };

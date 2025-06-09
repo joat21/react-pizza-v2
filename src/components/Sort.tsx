@@ -1,5 +1,7 @@
 import { useState, type FC } from 'react';
+import { useClickAway } from '@uidotdev/usehooks';
 import clsx from 'clsx';
+
 import { SortBy, type PizzaFilters, type SortType } from 'types';
 
 const sorts: SortType[] = [
@@ -16,6 +18,9 @@ type SortProps = {
 
 export const Sort: FC<SortProps> = ({ filters, setFilters }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useClickAway<HTMLUListElement>(() => {
+    setIsOpen(false);
+  });
 
   return (
     <div className="relative cursor-pointer">
@@ -45,12 +50,15 @@ export const Sort: FC<SortProps> = ({ filters, setFilters }) => {
         </span>
       </div>
       {isOpen && (
-        <ul className="absolute right-0 py-2.5 max-w-[160px] w-[100%] rounded-[10px] bg-white overflow-hidden shadow-light">
+        <ul
+          className="absolute right-0 py-2.5 max-w-[160px] w-[100%] rounded-[10px] bg-white overflow-hidden shadow-light"
+          ref={ref}
+        >
           {sorts.map((sort) => (
             <li
               key={sort.name}
               className={clsx('py-3 px-5 cursor-pointer hover:bg-yellow-50', {
-                'text-orange-500 font-bold bg-yel':
+                'text-orange-500 font-bold bg-yellow-50':
                   filters.sortBy === sort.sortBy,
               })}
               onClick={() =>
