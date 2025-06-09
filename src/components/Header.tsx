@@ -5,8 +5,11 @@ import { Button } from '@UI';
 import { Search } from './Search';
 
 import logo from '@assets/img/pizza-logo.svg';
+import { useCartStore } from '@store/cart';
 
 export const Header: FC = () => {
+  const { totalCount, totalPrice } = useCartStore();
+
   return (
     <header>
       <div className="container flex justify-between items-center gap-10">
@@ -42,7 +45,7 @@ export const Header: FC = () => {
             <span>Профиль</span>
           </Button>
           <Button className="flex items-center font-semibold" to="/cart">
-            <span>3000 ₽</span>
+            <span>{totalPrice} ₽</span>
             <span className="w-px h-6 mx-3.5 bg-white opacity-25" />
             <svg
               className="mr-2"
@@ -74,7 +77,7 @@ export const Header: FC = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>5</span>
+            <span>{totalCount}</span>
           </Button>
         </div>
       </div>

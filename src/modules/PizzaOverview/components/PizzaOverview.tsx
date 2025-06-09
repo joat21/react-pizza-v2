@@ -8,6 +8,7 @@ import { useGetPizzaByIdQuery } from '../api/useGetPizzaByIdQuery';
 import { useGetRecommendedPizza } from '../api/useGetRecommendedPizza';
 
 import type { PizzaVariant } from 'types';
+import { useCartStore } from '@store/cart';
 
 export const PizzaOverview: FC = () => {
   const { id } = useParams();
@@ -22,6 +23,8 @@ export const PizzaOverview: FC = () => {
     null
   );
 
+  const { addItem } = useCartStore();
+
   if (
     !pizza ||
     isPizzaLoading ||
@@ -32,8 +35,8 @@ export const PizzaOverview: FC = () => {
 
   return (
     <div className="container flex flex-col justify-center gap-20">
-      <div className="flex justify-center items-center">
-        <img src={pizza.imageUrl} alt={pizza.title} />
+      <div className="flex items-center gap-8">
+        <img width={560} src={pizza.overviewImageUrl} alt={pizza.title} />
         <div className="flex flex-col gap-3 max-w-[500px]">
           <h1 className="text-4xl font-black">{pizza.title}</h1>
           <p className="text-gray-500">
@@ -44,7 +47,15 @@ export const PizzaOverview: FC = () => {
             variants={pizza.variants}
             setCurrentVariant={setCurrentVariant}
           />
-          <Button className="max-w-3xs">
+          <Button
+            className="max-w-3xs text-[18px] font-semibold"
+            onClick={() =>
+              addItem({
+                id: currentVariant?.id!,
+                price: currentVariant?.price!,
+              })
+            }
+          >
             В корзину за {currentVariant?.price}₽
           </Button>
         </div>

@@ -2,8 +2,11 @@ import { useState, type FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PizzaVariantSelector } from '@components';
-import type { Pizza, PizzaVariant } from 'types';
 import { Button } from '@UI';
+
+import { useCartStore } from '@store/cart';
+
+import type { Pizza, PizzaVariant } from 'types';
 
 type PizzaCardProps = {
   pizza: Pizza;
@@ -13,7 +16,10 @@ export const PizzaCard: FC<PizzaCardProps> = ({ pizza }) => {
   const [currentVariant, setCurrentVariant] = useState<PizzaVariant | null>(
     pizza.variants[0]
   );
-  const [count, setCount] = useState(0);
+
+  const { items, addItem } = useCartStore();
+  const cartItem = items.find((item) => item.id === currentVariant?.id);
+  const itemCount = cartItem ? cartItem.count : 0;
 
   return (
     <article className="flex justify-center items-center flex-col max-w-[280px] w-[100%] text-center">
@@ -33,7 +39,12 @@ export const PizzaCard: FC<PizzaCardProps> = ({ pizza }) => {
           <Button
             className="flex items-center gap-1"
             variant="outline"
-            onClick={() => setCount((prev) => ++prev)}
+            onClick={() =>
+              addItem({
+                id: currentVariant?.id!,
+                price: currentVariant?.price!,
+              })
+            }
           >
             <svg
               width="12"
@@ -48,9 +59,9 @@ export const PizzaCard: FC<PizzaCardProps> = ({ pizza }) => {
               />
             </svg>
             <span>Добавить</span>
-            {count > 0 && (
+            {itemCount > 0 && (
               <span className="w-[22px] h-[22px] flex items-center justify-center rounded-full text-[13px] font-semibold text-white bg-accent leading-none">
-                {count}
+                {itemCount}
               </span>
             )}
           </Button>

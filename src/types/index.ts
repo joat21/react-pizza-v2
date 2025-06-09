@@ -10,6 +10,7 @@ export type Pizza = {
   title: string;
   description: string;
   imageUrl: string;
+  overviewImageUrl: string;
   categoryId: string;
   rating: number;
   minPrice: number;
