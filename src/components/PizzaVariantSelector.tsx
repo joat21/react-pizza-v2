@@ -1,23 +1,29 @@
-import clsx from 'clsx';
 import { useEffect, useState, type FC } from 'react';
+import clsx from 'clsx';
 import type { PizzaVariant } from 'types';
 
 type PizzaVariantSelectorProps = {
   variants: PizzaVariant[];
+  currentVariant: PizzaVariant | null;
   setCurrentVariant: React.Dispatch<React.SetStateAction<PizzaVariant | null>>;
 };
 
 export const PizzaVariantSelector: FC<PizzaVariantSelectorProps> = ({
   variants,
+  currentVariant,
   setCurrentVariant,
 }) => {
-  const types = [
+  const doughTypes = [
     ...new Set(variants.map((variant) => variant.doughType)),
   ].sort();
   const sizes = [...new Set(variants.map((variant) => variant.size))].sort();
 
-  const [activeType, setActiveType] = useState(types[0]);
-  const [activeSize, setActiveSize] = useState(sizes[0]);
+  const [activeType, setActiveType] = useState(
+    currentVariant ? currentVariant.doughType : doughTypes[0]
+  );
+  const [activeSize, setActiveSize] = useState(
+    currentVariant ? currentVariant.size : sizes[0]
+  );
 
   useEffect(() => {
     const currentVariaint =
@@ -32,7 +38,7 @@ export const PizzaVariantSelector: FC<PizzaVariantSelectorProps> = ({
   return (
     <div className="flex flex-col gap-1.5 p-1.5 w-[100%] rounded-[10px] text-center bg-gray-100">
       <ul className="flex w-[100%]">
-        {types.map((type) => (
+        {doughTypes.map((type) => (
           <li
             key={type}
             onClick={() => setActiveType(type)}

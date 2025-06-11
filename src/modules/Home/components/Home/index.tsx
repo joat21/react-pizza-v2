@@ -3,8 +3,8 @@ import clsx from 'clsx';
 
 import { Categories, PizzaList, Sort } from '@components';
 
-import { useGetCategoriesQuery } from '../../api/useGetCategoriesQuery';
-import { useGetPizzasQuery } from '../../api/useGetPizzasQuery';
+import { useCategoriesQuery } from 'api/categories';
+import { usePizzaQuery } from 'api/pizza';
 
 import { SortBy } from 'types';
 
@@ -17,9 +17,8 @@ export const Home: FC = () => {
   });
 
   const { data: categories, isLoading: isCategoriesLoading } =
-    useGetCategoriesQuery();
-  const { data: pizzas, isLoading: isPizzasLoading } =
-    useGetPizzasQuery(filters);
+    useCategoriesQuery();
+  const { data: pizzas, isLoading: isPizzasLoading } = usePizzaQuery(filters);
 
   if (!pizzas || isPizzasLoading || !categories || isCategoriesLoading)
     return 'Loading...';
@@ -34,7 +33,12 @@ export const Home: FC = () => {
         />
         <Sort filters={filters} setFilters={setFilters} />
       </div>
-      <h2 className={styles.title}>Вся пицца</h2>
+      <h2 className={styles.title}>
+        {`${
+          categories.find((category) => category.id === filters.categoryId)
+            ?.name || 'Вся'
+        } пицца`}
+      </h2>
       <PizzaList pizzas={pizzas} />
     </div>
   );

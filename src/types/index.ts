@@ -17,6 +17,23 @@ export type Pizza = {
   variants: PizzaVariant[];
 };
 
+export type CartItem = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  doughType: string;
+  size: number;
+  amount: number;
+  price: number;
+  pizzaVariantId: string;
+};
+
+export type CartMinimalItem = {
+  id: string;
+  amount: number;
+  price: number;
+};
+
 export type Category = {
   id: string;
   name: string;

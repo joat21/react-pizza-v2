@@ -22,19 +22,22 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const button = tv({
-    base: 'px-6 py-3 min-w-[100px] border border-accent rounded-[30px] text-center transition-colors duration-150 ease-in-out active:bg-orange-700',
+    base: 'px-6 py-3 border border-accent rounded-[30px] transition-colors duration-150 ease-in-out active:bg-orange-700',
     variants: {
       variant: {
         primary: 'text-white bg-accent hover:bg-orange-600',
         outline: 'text-accent bg-transparent hover:text-white hover:bg-accent',
       },
     },
+    extend: {
+      className: true,
+    },
   });
 
   if (to) {
     return (
       <Link
-        className={clsx(className, button({ variant }))}
+        className={clsx(button({ variant, className }))}
         to={to}
         onClick={onClick}
       >
@@ -45,7 +48,7 @@ export const Button: FC<ButtonProps> = ({
 
   return (
     <button
-      className={clsx(className, button({ variant }))}
+      className={clsx(button({ variant, className }))}
       type={type}
       onClick={onClick}
       {...props}

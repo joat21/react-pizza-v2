@@ -1,5 +1,6 @@
 import type { FC } from 'react';
+import { Cart } from '@modules/Cart';
 
 export const CartPage: FC = () => {
-  return <div>CartPage</div>;
+  return <Cart />;
 };

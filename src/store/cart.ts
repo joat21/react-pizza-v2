@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 type CartItem = {
   id: string;
-  count: number;
+  amount: number;
   price: number;
 };
 
@@ -10,10 +10,10 @@ type CartStore = {
   items: CartItem[];
   totalCount: number;
   totalPrice: number;
-  addItem: (item: { id: string; price: number }) => void;
+  addItem: (id: string, price: number) => void;
   deleteItem: (id: string) => void;
-  incrementItemCount: (id: string) => void;
-  decrementItemCount: (id: string) => void;
+  changeCount: (id: string, difference: number) => void;
+  setItems: (items: CartItem[]) => void;
   clearCart: () => void;
 };
 
@@ -22,7 +22,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   totalCount: 0,
   totalPrice: 0,
 
-  addItem({ id, price }) {
+  addItem(id, price) {
     const { items } = get();
 
     const existingItem = items.find((item) => item.id === id);
@@ -30,10 +30,10 @@ export const useCartStore = create<CartStore>((set, get) => ({
     let newItems;
     if (existingItem) {
       newItems = items.map((item) =>
-        item.id === id ? { ...item, count: item.count + 1 } : item
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
       );
     } else {
-      newItems = [...items, { id, price, count: 1 }];
+      newItems = [...items, { id, price, amount: 1 }];
     }
 
     set(() => calculateTotals(newItems));
@@ -46,24 +46,19 @@ export const useCartStore = create<CartStore>((set, get) => ({
     set(() => calculateTotals(newItems));
   },
 
-  incrementItemCount(id) {
+  changeCount(id, difference) {
     const { items } = get();
-    const newItems = items.map((item) =>
-      item.id === id ? { ...item, count: item.count + 1 } : item
-    );
+    const newItems = items
+      .map((item) =>
+        item.id === id ? { ...item, amount: item.amount + difference } : item
+      )
+      .filter((item) => item.amount > 0);
 
     set(() => calculateTotals(newItems));
   },
 
-  decrementItemCount(id) {
-    const { items } = get();
-    let newItems = items
-      .map((item) =>
-        item.id === id ? { ...item, count: item.count - 1 } : item
-      )
-      .filter((item) => item.count > 0);
-
-    set(() => calculateTotals(newItems));
+  setItems(items) {
+    set(() => calculateTotals(items));
   },
 
   clearCart() {
@@ -76,9 +71,9 @@ export const useCartStore = create<CartStore>((set, get) => ({
 }));
 
 const calculateTotals = (items: CartItem[]) => {
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum, item) => sum + item.amount, 0);
   const totalPrice = items.reduce(
-    (sum, item) => sum + item.count * item.price,
+    (sum, item) => sum + item.amount * item.price,
     0
   );
   return {
