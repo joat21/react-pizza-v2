@@ -15,7 +15,7 @@ export const OrdersList = () => {
         {orders.map((order, index) => (
           <li
             key={order.id}
-            className="max-w-3xl rounded-3xl bg-white shadow-md"
+            className="max-w-3xl rounded-3xl bg-white shadow-lg"
           >
             <div className="flex items-center gap-5 py-7 px-9">
               <h3 className="text-2xl font-bold">
@@ -32,7 +32,7 @@ export const OrdersList = () => {
                 </li>
               ))}
             </ul>
-            <div className="py-7 px-9 border-t border-gray-200 text-xl">
+            <div className="py-7 px-9 border-t border-gray-200 text-2xl">
               Итого:
               <span className="font-extrabold"> {order.totalPrice} ₽</span>
             </div>

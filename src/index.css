@@ -89,7 +89,7 @@ button:focus-visible {
   height: 100%;
   max-width: 1400px;
   border-radius: 10px;
-  background-color: var(--color-gray-50);
+  background-color: var(--color-white);
 }
 
 .container {
