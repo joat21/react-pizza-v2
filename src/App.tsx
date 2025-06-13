@@ -1,6 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
-import { CartPage, HomePage, NotFoundPage, PizzaPage } from './pages';
+import {
+  CartPage,
+  HomePage,
+  NotFoundPage,
+  PizzaPage,
+  ProfilePage,
+} from './pages';
 
 function App() {
   return (
@@ -9,6 +15,7 @@ function App() {
         <Route path="" element={<HomePage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="pizza/:id" element={<PizzaPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

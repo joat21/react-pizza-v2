@@ -23,7 +23,9 @@
   --color-primary: var(--color-gray-800);
   --color-secondary: var(--color-white);
   --color-accent: var(--color-orange-500);
+
   --shadow-light: 0px 5px 15px rgba(0, 0, 0, 0.09);
+  --shadow-order: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 :root {
@@ -87,7 +89,7 @@ button:focus-visible {
   height: 100%;
   max-width: 1400px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: var(--color-gray-50);
 }
 
 .container {

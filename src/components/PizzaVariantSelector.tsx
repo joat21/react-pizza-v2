@@ -36,7 +36,7 @@ export const PizzaVariantSelector: FC<PizzaVariantSelectorProps> = ({
   }, [activeType, activeSize]);
 
   return (
-    <div className="flex flex-col gap-1.5 p-1.5 w-[100%] rounded-[10px] text-center bg-gray-100">
+    <div className="flex flex-col gap-1.5 p-1.5 w-[100%] rounded-[10px] text-center bg-gray-200">
       <ul className="flex w-[100%]">
         {doughTypes.map((type) => (
           <li
