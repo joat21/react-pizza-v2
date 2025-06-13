@@ -4,6 +4,7 @@ import { CartItems } from './CartItems';
 
 import { useClearCartMutation, useCartQuery } from 'api/cart';
 import { Button } from '@UI';
+import { EmptyPlaceholder } from './EmptyPlaceholder';
 
 export const Cart: FC = () => {
   const { mutate: clearCartMutate } = useClearCartMutation();
@@ -15,6 +16,8 @@ export const Cart: FC = () => {
   const handleClearCart = () => {
     clearCartMutate();
   };
+
+  if (!cart.items.length) return <EmptyPlaceholder />;
 
   return (
     <div className="container flex flex-col gap-9 max-w-[820px] my-24 mx-auto">
