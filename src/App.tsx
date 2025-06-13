@@ -14,7 +14,7 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route path="" element={<HomePage />} />
         <Route path="cart" element={<CartPage />} />
-        <Route path="pizza/:id" element={<PizzaPage />} />
+        <Route path="pizza/:id/:slug" element={<PizzaPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

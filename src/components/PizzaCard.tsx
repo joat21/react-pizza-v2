@@ -37,7 +37,7 @@ export const PizzaCard: FC<PizzaCardProps> = ({ pizza }) => {
 
   return (
     <article className="flex justify-center items-center flex-col max-w-[280px] w-[100%] text-center">
-      <Link to={`/pizza/${pizza.id}`}>
+      <Link to={`/pizza/${pizza.id}/${pizza.slug}`}>
         <img width={260} src={pizza.imageUrl} alt={pizza.title} />
       </Link>
       <div className="flex flex-col items-center gap-5 w-[100%]">

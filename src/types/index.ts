@@ -21,6 +21,7 @@ export type Pizza = {
   rating: number;
   minPrice: number;
   variants: PizzaVariant[];
+  slug: string;
 };
 
 export type CartItem = {
@@ -61,22 +62,6 @@ export type PizzaFilters = {
   categoryId: string;
   sortBy: SortBy;
 };
-
-// const response = orders.map((order) => ({
-//   id: order.id,
-//   createdAt: order.createdAt,
-//   totalPrice: order.totalPrice,
-//   comment: order.comment,
-//   items: order.items.map((item) => ({
-//     id: item.id,
-//     title: item.pizzaVariant.pizza.title,
-//     imageUrl: item.pizzaVariant.pizza.imageUrl,
-//     doughType: item.pizzaVariant.doughType.name,
-//     size: item.pizzaVariant.pizzaSize.size,
-//     amount: item.amount,
-//     price: item.priceAtOrder * item.amount,
-//   })),
-// }));
 
 export type Order = {
   id: string;
