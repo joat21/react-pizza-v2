@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { QueryClient } from '@tanstack/react-query';
+import { keepPreviousData, QueryClient } from '@tanstack/react-query';
 import { API_URL } from 'config';
 
 export const api = axios.create({
@@ -10,4 +10,10 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      placeholderData: keepPreviousData,
+    },
+  },
+});

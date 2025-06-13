@@ -20,7 +20,7 @@ export const Cart: FC = () => {
   if (!cart.items.length) return <EmptyPlaceholder />;
 
   return (
-    <div className="container flex flex-col gap-9 max-w-[820px] my-24 mx-auto">
+    <div className="container flex flex-col gap-9 max-w-[820px] mx-auto">
       <div className="flex justify-between items-center">
         <h1 className="flex items-center gap-2.5 text-4xl font-semibold">
           <svg

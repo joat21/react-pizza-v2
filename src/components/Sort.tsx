@@ -61,9 +61,10 @@ export const Sort: FC<SortProps> = ({ filters, setFilters }) => {
                 'text-orange-500 font-bold bg-yellow-50':
                   filters.sortBy === sort.sortBy,
               })}
-              onClick={() =>
-                setFilters((prev) => ({ ...prev, sortBy: sort.sortBy }))
-              }
+              onClick={() => {
+                setFilters((prev) => ({ ...prev, sortBy: sort.sortBy }));
+                setIsOpen(false);
+              }}
             >
               {sort.name}
             </li>
