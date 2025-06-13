@@ -1,89 +1,80 @@
-import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
-import { api, queryClient } from 'api';
-import { optimisticUpdate } from 'helpers/optimisticUpdate';
+import { type UseMutationOptions } from '@tanstack/react-query';
+
+import { api } from 'api';
+import { useOptimisticMutation } from 'hooks/useOptimisticMutation';
+
 import type { CartItem } from 'types';
 
 const queryKey = ['cart'];
 
 export const useAddToCartMutation = (
   options?: Partial<
-    UseMutationOptions<CartItem, Error, CartItem, { previousData?: CartItem[] }>
+    UseMutationOptions<
+      CartItem[],
+      Error,
+      CartItem,
+      { previousData: CartItem[] | undefined }
+    >
   >
 ) =>
-  useMutation({
+  useOptimisticMutation({
+    queryKey,
     mutationFn: (item) =>
       api.post('/cart', { pizzaVariantId: item.pizzaVariantId }),
-    onMutate: async (item) =>
-      optimisticUpdate<CartItem[]>(queryKey, (data) => [...data, item]),
-    onError: (_error, _variables, context) => {
-      queryClient.setQueryData(queryKey, context?.previousData);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-    },
+    updater: (data, item) => [...data, item],
     ...options,
   });
 
 export const useUpdateCartItemMutation = (
   options?: Partial<
     UseMutationOptions<
-      CartItem,
+      CartItem[],
       Error,
       { id: string; amount: number },
-      { previousData?: CartItem[] }
+      { previousData: CartItem[] | undefined }
     >
   >
 ) =>
-  useMutation({
+  useOptimisticMutation({
+    queryKey,
     mutationFn: (cartItem) => api.patch('/cart/' + cartItem.id, cartItem),
-    onMutate: async (cartItem) =>
-      optimisticUpdate<CartItem[]>(queryKey, (data) =>
-        data.map((item) =>
-          item.id === cartItem.id ? { ...item, amount: cartItem.amount } : item
-        )
+    updater: (data, cartItem) =>
+      data.map((item) =>
+        item.id === cartItem.id ? { ...item, amount: cartItem.amount } : item
       ),
-    onError: (_error, _variables, context) => {
-      queryClient.setQueryData(queryKey, context?.previousData);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-    },
     ...options,
   });
 
 export const useDeleteCartItemMutation = (
   options?: Partial<
-    UseMutationOptions<CartItem, Error, string, { previousData?: CartItem[] }>
+    UseMutationOptions<
+      CartItem[],
+      Error,
+      string,
+      { previousData: CartItem[] | undefined }
+    >
   >
 ) =>
-  useMutation({
+  useOptimisticMutation({
+    queryKey,
     mutationFn: (itemId) => api.delete('/cart/' + itemId),
-    onMutate: async (itemId) =>
-      optimisticUpdate<CartItem[]>(queryKey, (data) =>
-        data.filter((item) => item.id !== itemId)
-      ),
-    onError: (_error, _variables, context) => {
-      queryClient.setQueryData(queryKey, context?.previousData);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-    },
+    updater: (data, itemId) => data.filter((item) => item.id !== itemId),
     ...options,
   });
 
 export const useClearCartMutation = (
   options?: Partial<
-    UseMutationOptions<any, Error, void, { previousData?: CartItem[] }>
+    UseMutationOptions<
+      any,
+      Error,
+      void,
+      { previousData: CartItem[] | undefined }
+    >
   >
 ) =>
-  useMutation({
+  useOptimisticMutation({
+    queryKey,
     mutationFn: () => api.delete('/cart'),
-    onMutate: async () => optimisticUpdate<CartItem[]>(queryKey, () => []),
-    onError: (_error, _variables, context) => {
-      queryClient.setQueryData(queryKey, context?.previousData);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-    },
+    updater: () => [],
     ...options,
   });
