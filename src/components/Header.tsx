@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import { Button } from '@UI';
 import { Search } from './Search';
 
+import { useUserQuery } from 'api/auth';
 import { useCartQuery } from 'api/cart';
+
+import { API_URL } from 'config';
 
 import logo from '@assets/img/pizza-logo.svg';
 
 export const Header: FC = () => {
-  const { data, isLoading } = useCartQuery();
+  const { data: user, isLoading: isUserLoading } = useUserQuery();
+  const { data: cart, isLoading: isCartLoading } = useCartQuery();
 
   return (
     <header>
@@ -25,31 +29,37 @@ export const Header: FC = () => {
         </Link>
         <Search />
         <div className="flex gap-2.5 items-center shrink-0">
-          <Button
-            className="flex items-center gap-1 font-semibold"
-            variant="outline"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {isUserLoading ? (
+            <span>Скелетончик</span>
+          ) : (
+            <Button
+              className="flex items-center gap-1 font-semibold"
+              variant="outline"
+              to={user ? '/profile' : `${API_URL}/auth/github`}
             >
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span>Профиль</span>
-          </Button>
-          {isLoading ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Профиль</span>
+            </Button>
+          )}
+
+          {isCartLoading ? (
             <span>Скелетончик</span>
           ) : (
             <Button className="flex items-center font-semibold" to="/cart">
-              <span>{data?.totalPrice} ₽</span>
+              <span>{cart?.totalPrice} ₽</span>
               <span className="w-px h-6 mx-3.5 bg-white opacity-25" />
               <svg
                 className="mr-2"
@@ -81,7 +91,7 @@ export const Header: FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{data?.totalCount}</span>
+              <span>{cart?.totalCount}</span>
             </Button>
           )}
         </div>
