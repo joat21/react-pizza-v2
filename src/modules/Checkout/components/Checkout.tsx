@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,7 +11,6 @@ import { Address } from './Address';
 
 import { useCartQuery } from 'api/cart';
 import { useCreateOrderMutation } from 'api/orders';
-import { useNavigate } from 'react-router-dom';
 
 const checkoutSchema = z.object({
   name: z.string().min(2, 'Не короче 2 символов'),
@@ -42,7 +42,7 @@ export const Checkout: FC = () => {
 
   if (!cart || isLoading) return 'Loading...';
 
-  const onSubmit = (data: CheckoutFormData) => {
+  const handleSubmit = (data: CheckoutFormData) => {
     console.log(data);
     createOrderMutation.mutate(data, {
       onSuccess: () => {
@@ -54,7 +54,7 @@ export const Checkout: FC = () => {
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(onSubmit)}
+        onSubmit={methods.handleSubmit(handleSubmit)}
         className="container flex flex-col justify-center gap-5"
       >
         <h1 className="text-3xl font-semibold leading-8">Оформление заказа</h1>

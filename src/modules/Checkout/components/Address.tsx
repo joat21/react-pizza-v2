@@ -1,8 +1,9 @@
 import type { FC } from 'react';
-import { Section } from './Section';
-import { Textarea } from '@UI';
-import { ValidatedInput } from './ValidatedInput';
 import { useFormContext } from 'react-hook-form';
+
+import { Textarea } from '@UI';
+import { ValidatedInput } from '@components';
+import { Section } from './Section';
 
 export const Address: FC = () => {
   const { register } = useFormContext();

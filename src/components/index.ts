@@ -6,3 +6,4 @@ export { PizzaVariantSelector } from './PizzaVariantSelector';
 export { PizzaCard } from './PizzaCard';
 export { PizzaList } from './PizzaList';
 export { OrderItem } from './OrderItem';
+export { ValidatedInput } from './ValidatedInput';

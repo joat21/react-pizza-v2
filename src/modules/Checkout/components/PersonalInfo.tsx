@@ -1,8 +1,8 @@
 import { useEffect, type FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
+import { ValidatedInput } from '@components';
 import { Section } from './Section';
-import { ValidatedInput } from './ValidatedInput';
 
 import { useUserQuery } from 'api/auth';
 
@@ -12,9 +12,7 @@ export const PersonalInfo: FC = () => {
 
   useEffect(() => {
     if (user) {
-      reset({
-        name: user.name,
-      });
+      reset(user);
     }
   }, [user]);
 
