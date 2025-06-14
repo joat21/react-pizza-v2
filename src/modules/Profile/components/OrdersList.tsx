@@ -1,4 +1,4 @@
-import { OrderItem } from './OrderItem';
+import { OrderItem } from '@components';
 import { useOrdersQuery } from 'api/orders';
 import { formatDate } from 'helpers/formatDate';
 
@@ -17,7 +17,7 @@ export const OrdersList = () => {
             key={order.id}
             className="max-w-3xl rounded-3xl bg-white shadow-lg"
           >
-            <div className="flex items-center gap-5 py-7 px-9">
+            <div className="flex items-center gap-5 py-7 px-9 border-b border-gray-200">
               <h3 className="text-2xl font-bold">
                 Заказ #{orders.length - index}
               </h3>
@@ -27,7 +27,7 @@ export const OrdersList = () => {
             </div>
             <ul>
               {order.items.map((item) => (
-                <li key={item.id}>
+                <li key={item.id} className="group">
                   <OrderItem item={item} />
                 </li>
               ))}

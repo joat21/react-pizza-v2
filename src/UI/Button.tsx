@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { tv } from 'tailwind-variants';
@@ -37,7 +36,7 @@ export const Button: FC<ButtonProps> = ({
   if (to) {
     return (
       <Link
-        className={clsx(button({ variant, className }))}
+        className={button({ variant, className })}
         to={to}
         onClick={onClick}
       >
@@ -48,7 +47,7 @@ export const Button: FC<ButtonProps> = ({
 
   return (
     <button
-      className={clsx(button({ variant, className }))}
+      className={button({ variant, className })}
       type={type}
       onClick={onClick}
       {...props}

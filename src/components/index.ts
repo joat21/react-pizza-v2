@@ -5,3 +5,4 @@ export { Sort } from './Sort';
 export { PizzaVariantSelector } from './PizzaVariantSelector';
 export { PizzaCard } from './PizzaCard';
 export { PizzaList } from './PizzaList';
+export { OrderItem } from './OrderItem';

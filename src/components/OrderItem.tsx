@@ -7,7 +7,7 @@ type OrderItemProps = {
 
 export const OrderItem: FC<OrderItemProps> = ({ item }) => {
   return (
-    <div className="flex justify-between items-center py-5 px-9 border-t border-gray-200">
+    <div className="flex justify-between items-center py-5 px-9 group-not-first:border-t border-gray-200">
       <div className="flex items-center gap-2.5">
         <img width={80} height={80} src={item.imageUrl} alt={item.title} />
         <div>

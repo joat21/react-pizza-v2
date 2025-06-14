@@ -104,15 +104,15 @@ export const Cart: FC = () => {
           Всего пиццы: <span className="font-bold">{cart.totalCount} шт.</span>
         </span>
         <span>
-          Сумма заказа:{' '}
-          <span className="text-accent font-bold">{cart.totalPrice} ₽</span>
+          Сумма заказа:
+          <span className="text-accent font-bold"> {cart.totalPrice} ₽</span>
         </span>
       </div>
       <div className="flex justify-between">
         <Button to="/" variant="outline">
           Вернуться назад
         </Button>
-        <Button to="/">Перейти к оформлению</Button>
+        <Button to="/checkout">Перейти к оформлению</Button>
       </div>
     </div>
   );

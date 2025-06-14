@@ -1,16 +1,16 @@
-import type { FC, InputHTMLAttributes } from 'react';
+import type { FC, TextareaHTMLAttributes } from 'react';
 import { tv } from 'tailwind-variants';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: 'primary' | 'filled';
 }
 
-export const Input: FC<InputProps> = ({
+export const Textarea: FC<TextareaProps> = ({
   className,
   variant = 'primary',
   ...props
 }) => {
-  const input = tv({
+  const textarea = tv({
     base: 'px-6 py-3 w-full rounded-[30px] placeholder:text-gray-400 transition-colors duration-150 ease-in-out2',
     variants: {
       variant: {
@@ -22,6 +22,5 @@ export const Input: FC<InputProps> = ({
       className: true,
     },
   });
-
-  return <input className={input({ variant, className })} {...props} />;
+  return <textarea className={textarea({ variant, className })} {...props} />;
 };
